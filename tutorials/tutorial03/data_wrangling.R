@@ -7,8 +7,8 @@ library(tidyverse)
 library(lubridate)
 
 # import movies.csv
-dat <- read.csv("movies.csv") # Base R function (utils package)
-
+dat <- read.csv("https://github.com/Shaunaruthy/StatsI_Fall2022/blob/main/datasets/movies.csv") # Base R function (utils package)
+dat
 # Convert factors
 char_vecs <- sapply(dat, is.character) # Make an index object for subsetting character vectors
 unique <- Map(length, lapply(dat[,char_vecs], unique)) # Count the unique values in each character vector

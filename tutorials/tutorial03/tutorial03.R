@@ -6,8 +6,10 @@
 library(tidyverse) # load our packages here
 
 ## Import data
-dat <- read.csv("movies.csv")
+dat <- read.csv("https://raw.githubusercontent.com/Shaunaruthy/StatsI_Fall2022/main/datasets/movies.csv")
+dat <- read.csv("")
 
+movies
 ## Explore data
 str(dat)
 head(dat)
@@ -36,7 +38,7 @@ summary(dat)
 # The file below is a pre-wrangled version of `movies.csv`. You
 # can inspect the script used to make it, `data_wrangling.R`, in
 # your own time.
-dat <- readRDS("movies.RDS")
+dat <- readRDS("https://github.com/Shaunaruthy/StatsI_Fall2022/blob/main/datasets/movies.csv",skip = 1, header = F, sep = ",", stringsAsFactors = F))
 
 ## Making contingency tables
 # To create a contingency table, we use the `table()` function.
@@ -55,6 +57,8 @@ with(dat, addmargins(table(genre, critics_rating)))
 
 # Proportion along the rows:
 with(dat, prop.table(table(genre, critics_rating), margin = 1))
+###margin - each row produced adds to 1
+###changing to 2 - means summing along the columns
 
 # Try to find the proportion along the columns:
 
@@ -153,7 +157,8 @@ dev.off()
 # it work? Let's call it on the contingency table we used for 
 # the bar plot above.
 
-chi <- 
+chi <- chisq.test(table(dat_mini$genre, dat_mini$critics_rating))
+
 
 # Remember, when we assign the result of a test to an object,
 # we can then access all the information which belongs to that
