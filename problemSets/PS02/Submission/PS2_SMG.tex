@@ -1,0 +1,54 @@
+\noindent Each observation in the data set represents a village and there are two villages associated with one GP (i.e. a level of government is called "GP"). Figure~\ref{fig:women_desc} below shows the names and descriptions of the variables in the dataset. The authors hypothesize that female politicians are more likely to support policies female voters want. Researchers found that more women complain about the quality of drinking water than men. You need to estimate the effect of the reservation policy on the number of new or repaired drinking water facilities in the villages.
+\vspace{.5cm}
+\begin{figure}[h!]
+	\caption{\footnotesize{Names and description of variables from Chattopadhyay and Duflo (2004).}}
+	\vspace{.5cm}
+	\centering
+	\label{fig:women_desc}
+	\includegraphics[width=1.1\textwidth]{../../../../graphics/women_desc.png}
+\end{figure}		
+
+\newpage
+\begin{enumerate}
+	\item [(a)] State a null and alternative (two-tailed) hypothesis. 
+ 
+Null Hypothesis: Female politicians are equally likely to support policies that female voters as male politicians.
+
+Alternative Hypothesis: Female politicians are not equally likely to support policies female voters want as male politicians. 
+
+	\vspace{.25cm}
+	\item [(b)] Run a bivariate regression to test this hypothesis in \texttt{R} (include your code!).
+\lstinputlisting[language=R, firstline=105, lastline=151]{PS2.R}	
+	\vspace{.25cm}
+
+ \begin{verbatim}
+ Output of Bivariate Regression:
+ 
+     > summary(lm(data$water ~ data$reserved, data = data))
+
+Call:
+lm(formula = data$water ~ data$reserved, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-23.991 -14.738  -7.865   2.262 316.009 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)     14.738      2.286   6.446 4.22e-10 ***
+data$reserved    9.252      3.948   2.344   0.0197 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 33.45 on 320 degrees of freedom
+Multiple R-squared:  0.01688,	Adjusted R-squared:  0.0138 
+F-statistic: 5.493 on 1 and 320 DF,  p-value: 0.0197
+ \end{verbatim}
+ 
+	\item [(c)] Interpret the coefficient estimate for reservation policy. 
+
+The estimated coefficient value indicates that when x= 0 this is our y value. In this case if the reserved policy = 0 or is not present we see a score of 14.74 in our water measure. As the slope is not equal to zero this indicates there is a significant linear relationship between the two variables. We fail to reject the null hypothesis.
+
+\end{enumerate}
+
+\end{document}
