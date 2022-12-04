@@ -8,7 +8,6 @@ dat <- read.csv("https://raw.githubusercontent.com/gedeck/practical-statistics-f
 
 class(dat)
 
-plot(dat)
 library(dplyr)
 
 dat <- dat %>%
@@ -54,7 +53,9 @@ zip_group <- dat %>%
             count = n()) %>%
   arrange(med_price) %>%
   mutate(cumul_count = cumsum(count),
+         
          ZipGroup = ntile(cumul_count, 5))
+
 
 ##library(ggplot2)
 ##ggplot(zip_group, aes(x=ZipCode, y=ZipGroup)) +  geom_boxplot(fill='green')
@@ -75,7 +76,29 @@ mod4 <- lm(AdjSalePrice ~ SqFtTotLiving + BldgGrade + as.factor(ZipGroup), data 
 
 mod5 <- lm(AdjSalePrice ~ SqFtTotLiving + BldgGrade + as.factor(ZipGroup) + TrafficNoise, data = dat)
 
-stargazer(mod5, type = "text")
+
+library(dplyr) 
 
 
+a <- replace(dat$YrRenovated, dat$YrRenovated==0, dat$YrBuilt)
 
+dat <- cbind(dat, a)
+ 
+cor(dat$a, dat$AdjSalePrice)
+
+
+dat %>%
+  group_by(dat$a) %>%
+  mutate(av_price = mean(AdjSalePrice)) %>%
+  arrange(a)%>%
+  ggplot(aes(a, av_price)) +
+  geom_line()
+
+
+mod4
+summary(mod4)
+.58
+
+mod_Const <- lm(AdjSalePrice ~ SqFtTotLiving + BldgGrade + as.factor(ZipGroup) + a, data = dat)
+
+summary(mod_Const)
